@@ -15,7 +15,6 @@ const Login = () => {
 
   const handleClickLogin = (event) => {
     event.preventDefault();
-    localStorage.removeItem("token")
 
     fetch(`${import.meta.env.VITE_API_BASE_URL}/users/login`, {
       method: "POST",
@@ -31,8 +30,9 @@ const Login = () => {
         if (response.status == 400) {
           setErrorMessage("The email or password are incorrect, please check");
           setErrorText("text-center text-red-600 font-semibold");
+          return
         }
-
+        
         return response.json()
       })
       .then((data) => {
